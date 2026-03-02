@@ -1,3 +1,25 @@
+# Generated outputs — never commit
+results/
+output/
+data/
+htmlcov/
+README.html
+README_files/
+literature/
+experiments/
+docs/
+venv/
+run_validation*
+test_installation*
+FRAMEWORK_OVERVIEW*
+
+# LaTeX build artifacts
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

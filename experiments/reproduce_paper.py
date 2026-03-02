@@ -61,7 +61,7 @@ class PaperReproduction:
             output_dir: Directory for saving all outputs
         """
         self.output_dir = Path(output_dir)
-        self.output_dir.mkdir(exist_ok=True)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
 
         # Create subdirectories
         (self.output_dir / "figures").mkdir(exist_ok=True)
@@ -539,8 +539,9 @@ class PaperReproduction:
 def main():
     """Main entry point."""
 
-    # Create output directory
-    output_dir = Path(__file__).parent.parent / "results"
+    # Create timestamped output directory
+    run_ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_dir = Path(__file__).parent.parent / "output" / "reproduce_paper" / run_ts
 
     # Run reproduction
     reproduction = PaperReproduction(output_dir=str(output_dir))

@@ -1,17 +1,4 @@
-"""
-Models module for uncertainty quantification.
+from .fusion_svgp import FusionSVGP
+from .prior_mean import GridPriorMean
 
-Provides model wrappers and ensemble methods for UQ.
-"""
-
-from .ensemble import (
-    BootstrapSVGPEnsemble,
-    EnsembleUncertainty,
-    HyperparameterDistribution,
-)
-
-__all__ = [
-    "BootstrapSVGPEnsemble",
-    "EnsembleUncertainty",
-    "HyperparameterDistribution",
-]
+__all__ = ["FusionSVGP", "GridPriorMean"]

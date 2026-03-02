@@ -8,8 +8,13 @@ Usage:
     python examples/visualization_demo.py
 """
 
+import os
 import sys
-sys.path.insert(0, 'src')
+from datetime import datetime
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -180,7 +185,7 @@ def demo_basic_plots(X_train, y_train, X_test, y_test, predictions):
         title='GP Predictions with Uncertainty Bands'
     )
     plt.tight_layout()
-    plt.savefig('/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/gp_1d_uncertainty.png',
+    plt.savefig(os.path.join(OUT_DIR, 'gp_1d_uncertainty.png'),
                 dpi=300, bbox_inches='tight')
     print("   ✓ Saved to results/gp_1d_uncertainty.png")
     plt.close()
@@ -188,8 +193,8 @@ def demo_basic_plots(X_train, y_train, X_test, y_test, predictions):
     # Quick plot version
     print("\n2. Creating quick 1D plot (convenience function)...")
     fig2 = quick_plot(X_test, predictions, y_test,
-                      save_path='/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/gp_quick_1d.png')
-    print("   ✓ Saved to results/gp_quick_1d.png")
+                      save_path=os.path.join(OUT_DIR, 'gp_quick_1d.png'))
+    printprint("   ✓ Saved to results/gp_quick_1d.png")
     plt.close()
 
 
@@ -210,7 +215,7 @@ def demo_spatial_plots(X_train, y_train, X_test, y_test, predictions):
         plot_type='scatter'
     )
     plt.tight_layout()
-    plt.savefig('/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/spatial_total_uncertainty.png',
+    plt.savefig(os.path.join(OUT_DIR, 'spatial_total_uncertainty.png'),
                 dpi=300, bbox_inches='tight')
     print("   ✓ Saved to results/spatial_total_uncertainty.png")
     plt.close()
@@ -224,7 +229,7 @@ def demo_spatial_plots(X_train, y_train, X_test, y_test, predictions):
         plot_type='interpolated'
     )
     plt.tight_layout()
-    plt.savefig('/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/spatial_epistemic_uncertainty.png',
+    plt.savefig(os.path.join(OUT_DIR, 'spatial_epistemic_uncertainty.png'),
                 dpi=300, bbox_inches='tight')
     print("   ✓ Saved to results/spatial_epistemic_uncertainty.png")
     plt.close()
@@ -232,8 +237,8 @@ def demo_spatial_plots(X_train, y_train, X_test, y_test, predictions):
     # Quick spatial plot
     print("\n3. Creating quick spatial plot (convenience function)...")
     fig3 = quick_spatial_plot(X_test, predictions,
-                              save_path='/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/spatial_quick.png')
-    print("   ✓ Saved to results/spatial_quick.png")
+                              save_path=os.path.join(OUT_DIR, 'spatial_quick.png'))
+    printprint("   ✓ Saved to results/spatial_quick.png")
     plt.close()
 
 
@@ -253,7 +258,7 @@ def demo_decomposition_plot(X_train, y_train, X_test, y_test, predictions):
         title='Epistemic vs Aleatoric Uncertainty'
     )
     plt.tight_layout()
-    plt.savefig('/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/uncertainty_decomposition.png',
+    plt.savefig(os.path.join(OUT_DIR, 'uncertainty_decomposition.png'),
                 dpi=300, bbox_inches='tight')
     print("✓ Saved to results/uncertainty_decomposition.png")
     plt.close()
@@ -275,7 +280,7 @@ def demo_ood_detection(X_train, y_train, X_test, y_test, predictions):
         title='OOD Detection (Spatial Extrapolation)'
     )
     plt.tight_layout()
-    plt.savefig('/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/ood_detection.png',
+    plt.savefig(os.path.join(OUT_DIR, 'ood_detection.png'),
                 dpi=300, bbox_inches='tight')
     print("✓ Saved to results/ood_detection.png")
     plt.close()
@@ -295,7 +300,7 @@ def demo_calibration_curve(X_train, y_train, X_test, y_test, predictions):
         title='Calibration Curve (Reliability Diagram)'
     )
     plt.tight_layout()
-    plt.savefig('/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/calibration_curve.png',
+    plt.savefig(os.path.join(OUT_DIR, 'calibration_curve.png'),
                 dpi=300, bbox_inches='tight')
     print("✓ Saved to results/calibration_curve.png")
     plt.close()
@@ -316,7 +321,7 @@ def demo_complete_summary(X_train, y_train, X_test, y_test, predictions):
         X_test, predictions, y_test, X_train,
         suptitle='FusionGP Uncertainty Quantification - Complete Summary'
     )
-    plt.savefig('/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/complete_summary.png',
+    plt.savefig(os.path.join(OUT_DIR, 'complete_summary.png'),
                 dpi=300, bbox_inches='tight')
     print("✓ Saved to results/complete_summary.png")
     plt.close()
@@ -324,8 +329,8 @@ def demo_complete_summary(X_train, y_train, X_test, y_test, predictions):
     # Quick summary version
     print("\nCreating quick summary (convenience function)...")
     fig2 = quick_summary(X_test, predictions, y_test, X_train,
-                        save_path='/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results/quick_summary.png')
-    print("✓ Saved to results/quick_summary.png")
+                        save_path=os.path.join(OUT_DIR, 'quick_summary.png'))
+    printprint("✓ Saved to results/quick_summary.png")
     plt.close()
 
 
@@ -335,16 +340,17 @@ def demo_complete_summary(X_train, y_train, X_test, y_test, predictions):
 
 def main():
     """Run complete visualization demo."""
+    global OUT_DIR
+    run_ts  = datetime.now().strftime("%Y%m%d_%H%M%S")
+    OUT_DIR = str(Path(__file__).resolve().parent.parent / "output" / "visualization_demo" / run_ts)
+    os.makedirs(OUT_DIR, exist_ok=True)
 
     print("=" * 70)
     print("FUSIONGP UQ SYSTEM - VISUALIZATION DEMO")
     print("=" * 70)
+    print(f"\nOutput → {OUT_DIR}")
     print("\nThis demo creates beautiful GP-style plots of UQ results.")
     print("Perfect for dissertations, papers, and presentations!")
-
-    # Create results directory if it doesn't exist
-    import os
-    os.makedirs('/media/gabriel-oduori/SERVER/dev_space/uncertainty_quantification/results', exist_ok=True)
 
     # Run UQ system
     X_train, y_train, X_test, y_test, predictions = run_uq_system()

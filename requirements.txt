@@ -1,0 +1,19 @@
+# Core ML / GP
+torch==2.10.0
+gpytorch==1.15.1
+linear-operator==0.6
+
+# Numerical / data
+numpy==2.4.0
+pandas==2.3.3
+scipy==1.16.3
+
+# Visualisation
+matplotlib==3.10.8
+
+# Utilities
+loguru==0.7.3
+
+# Testing
+pytest==9.0.2
+pytest-cov==7.0.0
