@@ -3,9 +3,11 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Implementation of the **Uncertainty Quantification** dissertation chapter for probabilistic fusion of multi-source NO₂ observations (EPA monitors, satellite retrievals, LUR model) over Dublin.
+Implementation of the **Uncertainty Quantification** for probabilistic fusion of multi-source NO₂ observations (EPA monitors, satellite retrievals, LUR model) over Dublin.
 
 Builds on **[FusionGP](https://github.com/GabrielOduori/fusiongp)** — Sparse Variational GP fusion — and **[GAM-SSM-LUR](https://github.com/GabrielOduori/gam_ssm_lur)** — Land Use Regression baseline.
+
+The methods are implemented within this repo to avoid external code dependencies.
 
 ---
 
